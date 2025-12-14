@@ -15,7 +15,12 @@ def parse_fanqie(df):
         tone=df['fanqie'].str[-1]
     )
 
-    for col_name, varlist in (('rounding', ('合', '開')), ('niu', ('A', 'B'))):
+    col_names = ['rounding', 'niu']
+    varlists = (('合', '開'), ('A', 'B'))
+    
+    df[col_names] = None
+
+    for col_name, varlist in zip(col_names, varlists):
         x = df['final'].str[0]
         mask = x.isin(varlist)
 
@@ -25,5 +30,8 @@ def parse_fanqie(df):
                 'final': df['final'][mask].str.slice(1),
             }
         )
+
+    # Tidy df up
+    df = df[['fanqie', 'initial', 'rounding', 'niu', 'final', 'tone']]
 
     return df
