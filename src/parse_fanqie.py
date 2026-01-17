@@ -32,6 +32,9 @@ def parse_fanqie(df):
         )
 
     # Tidy df up
-    df = df[['fanqie', 'initial', 'rounding', 'niu', 'final', 'tone']]
+    cols_en = ['fanqie', 'initial', 'rounding', 'niu', 'final', 'tone']
+    cols_zh = ['切', '母', '呼', '紐', '韻', '聲']
+    df = df[cols_en]
+    df.columns = cols_zh
 
     return df

@@ -1,19 +1,7 @@
-class Hanzi():
-
-    def __init__(self, initial, rounding, niu, final, tone):
-
-        self.data = dict()
-
-        self.data['母'] = initial
-
-        self.data['韻'] = final
-
-        self.data['呼'] = rounding
-        self.data['紐'] = niu
-
-        self.data['聲'] = tone
-        self.data['舒'] = True if tone in '平上去' else False
-        self.data['仄'] = True if tone in '上去入' else False
+categories = ['母', '呼', '紐', '韻', '聲', 
+    '調', '組', '音', 
+    '等', '水', '攝', '轉', '尾', 
+    '舒', '仄',]
 
 def parse_query(s, query_delim=' '):
 
