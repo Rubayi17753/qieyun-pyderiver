@@ -14,7 +14,7 @@ def main():
         df = utils_fanqie.expand_with_categories(df)
 
         df3 = utils_fanqie.generate_json_template(df)
-        df3.to_csv(cat_inv_fp, encoding='utf-8', sep='\t', index=False)
+        df3.to_json(json_template_fp, index=True)
 
         df5 = utils_fanqie.category_inventory(df)
         df5.to_csv(cat_inv_fp, encoding='utf-8', sep='\t', index=False)

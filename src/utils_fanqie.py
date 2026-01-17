@@ -15,7 +15,6 @@ def _dfc_col():
 def expand_with_categories(df):
 
     dfcs, cols = _dfc_col()
-
     for dfc, col in zip(dfcs, cols):
         df = df.merge(dfc, how='left', on=col)
     df = df.drop(columns='韻合')
@@ -24,17 +23,18 @@ def expand_with_categories(df):
 
 def _category_inventory(df):
 
-    df = df.drop(columns='切')
+    dfcs, cols = _dfc_col()
+    
+    df_out = pd.DataFrame()
+    data_out = list()
+    
+    for dfc, col in zip(dfcs, cols):
+        for col2 in dfc.columns:
+            data_out.append({'col' : col2, 'val' : dfc[col2].unique().tolist()})
 
-    df2 = pd.DataFrame()
-    df2['col'] = df.columns
-    df2['val'] = [df[col].unique().tolist() for col in df.columns]
-    df2 = df2.explode('val', ignore_index=True)
-
-    print(df2)
-    exit()
-
-    return df2
+    df_out = pd.DataFrame.from_dict(data_out)
+    df_out = df_out.explode('val').reset_index()
+    return df_out
 
 def generate_json_template(df):
 
