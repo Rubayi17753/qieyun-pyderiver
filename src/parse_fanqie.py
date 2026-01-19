@@ -11,7 +11,7 @@ def parse_fanqie(df):
     
     df = df.assign(
         initial=df['fanqie'].str[0], 
-        final=df['fanqie'].str.slice(1, -1), 
+        rime=df['fanqie'].str.slice(1, -1), 
         tone=df['fanqie'].str[-1]
     )
 
@@ -21,18 +21,18 @@ def parse_fanqie(df):
     df[col_names] = None
 
     for col_name, varlist in zip(col_names, varlists):
-        x = df['final'].str[0]
+        x = df['rime'].str[0]
         mask = x.isin(varlist)
 
         df[mask] = df[mask].assign(
             **{
-                col_name: df['final'][mask].str[0],
-                'final': df['final'][mask].str.slice(1),
+                col_name: df['rime'][mask].str[0],
+                'rime': df['rime'][mask].str.slice(1),
             }
         )
 
     # Tidy df up
-    cols_en = ['fanqie', 'initial', 'rounding', 'niu', 'final', 'tone']
+    cols_en = ['fanqie', 'initial', 'rounding', 'niu', 'rime', 'tone']
     cols_zh = ['切', '母', '呼', '紐', '韻', '聲']
     df = df[cols_en]
     df.columns = cols_zh

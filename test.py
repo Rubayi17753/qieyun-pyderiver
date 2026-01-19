@@ -1,4 +1,4 @@
-from test.test1 import main as test1
+from test.test2 import main as test1
 
 def main():
     test1()

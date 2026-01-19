@@ -1,0 +1,1 @@
+python -c "from src.utils import generate_map_template; generate_map_template()"
